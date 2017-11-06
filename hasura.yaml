@@ -1,4 +1,4 @@
-description: Blank template for a Hasura project
+description: A basic c# asp.net project running on Hasura
 keywords: base, getting-started
-name: base
+name: hello-csharp-aspnet
 platformVersion: v0.15.3
