@@ -1,4 +1,4 @@
 description: A basic c# asp.net project running on Hasura
-keywords: csharp, asp, asp.net, c#, hello
+keywords: csharp, asp, asp.net, c#, hello, getting-started
 name: hello-csharp-aspnet
 platformVersion: v0.15.3
