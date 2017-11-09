@@ -1,4 +1,4 @@
-- alias: new
+- alias: hasura
   config:
     configmap: controller-conf
     namespace: hasura
