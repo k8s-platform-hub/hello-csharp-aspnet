@@ -1,4 +1,4 @@
-description: A basic c# asp.net project running on Hasura
+description: A Hasura starter project with a ready to deploy hello-world ASP.NET web application in C#.
 keywords: csharp, asp, asp.net, c#, hello, getting-started
 name: hello-csharp-aspnet
 platformVersion: v0.15.3
