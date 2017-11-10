@@ -1,6 +1,6 @@
 # hello-csharp-aspnet
 
-This project consists of a basic hasura project with a simple ASP.NET(C#) app running on it. Once this app is deployed on a Hasura cluster, you will have the app running at [https://app.cluster-name.hasura-app.io](https://app.cluster-name.hasura-app.io).
+This project consists of a basic hasura project with a simple ASP.NET(C#) app running on it. Once this app is deployed on a Hasura cluster, you will have the app running at https://www.cluster-name.hasura-app.io
 
 This is the right place to start if you are planning to build or want to learn to build an ASP.NET  app with hasura.
 
@@ -21,7 +21,7 @@ This is the right place to start if you are planning to build or want to learn t
 This quickstart project comes with the following by default:
 1. A basic hasura project
 2. Two tables `article` and `author` with some dummy data
-3. A basic ASP.NET app which runs at the `app` subdomain which fetches a list of articles available at the 'get_articles' endpoint
+3. A basic ASP.NET app which runs at the `www` subdomain which fetches a list of articles available at the 'get_articles' endpoint
 
 ## Quickstart
 
@@ -71,7 +71,7 @@ $ git push hasura master
 ```
 When you push for the first time, it might take sometime. Next time onwards, it is really fast.
 
-Once the above commands are executed successfully, head over to `https://app.cluster-name.hasura-app.io` (in this case `https://app.h34-excise98-stg.hasura-app.io`) to view your app.
+Once the above commands are executed successfully, head over to `https://www.cluster-name.hasura-app.io` (in this case `https://www.h34-excise98-stg.hasura-app.io`) to view your app.
 
 ### Api console
 
@@ -147,7 +147,7 @@ You can try out these in the `API EXPLORER` tab of the `api console`. To learn m
 
 There might be cases where you might want to perform some custom business logic on your apis. For example, sending an email/sms to a user on sign up or sending a push notification to the mobile device when some event happens. For this, you would want to create your own custom microservice which does these for you on the endpoints that you define.
 
-This quickstart comes with one such custom microservice written in C# using the ASP.NET framework. Check it out in action at `https://app.cluster-name.hasura-app.io` . Currently, it just returns a JSON response of "Hello World" at that endpoint.
+This quickstart comes with one such custom microservice written in C# using the ASP.NET framework. Check it out in action at `https://www.cluster-name.hasura-app.io` . Currently, it just returns a JSON response of "Hello World" at that endpoint.
 
 In case you want to use another language/framework for your custom microservice. Take a look at our docs to see how you can add a new custom microservice.
 
@@ -155,12 +155,12 @@ In case you want to use another language/framework for your custom microservice.
 
 If you have an existing ASP.NET app and would like to migrate it to Hasura:
 
-- Replace the `microservices/app/app` directory with your app directory.
+- Replace the `microservices/www/app` directory with your app directory.
 - Ensure that the structure of the directory is coherent with the current structure.
 - `git add . && git commit -m "Migration Commit"`
 - `git push hasura master`
 
-Now your existing app should be running on `https://app.cluster-name.hasura-app.io`
+Now your existing app should be running on `https://www.cluster-name.hasura-app.io`
 
 ## Local development
 
@@ -171,7 +171,7 @@ Everytime you push, your code will get deployed on a public URL. However, for fa
 Follow these steps to test out your app locally
 
 ```sh
-$ cd microservices/app/
+$ cd microservices/www/
 $ docker build -t csharp-aspnet .
 $ docker run -d -p 8080:8080 csharp-aspnet
 ```
@@ -203,7 +203,7 @@ The project (a.k.a. project directory) has a particular directory structure and 
 │   ├── 1504788327_create_table_user.up.yaml
 │   └── 1504788327_create_table_user.up.sql
 └── microservices
-    └── app
+    └── www
         ├── app/
         ├── k8s.yaml
         └── Dockerfile
