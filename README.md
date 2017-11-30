@@ -1,27 +1,27 @@
 # hello-csharp-aspnet
 
-This project consists of a basic Hasura project with a simple ASP.NET(C#) app running on it. Once this app is deployed on a Hasura cluster, you will have the app running at https://www.cluster-name.hasura-app.io
+This project consists of a basic Hasura project with a simple C#-ASP.net app running on it. Once this app is deployed on a Hasura cluster, you will have the app running at `https://api.<cluster-name>.hasura-app.io`
 
-This is the right place to start if you are planning to build or want to learn to build an ASP.NET  app with Hasura.
+This is the right place to start if you are planning to build or want to learn to build an ASP.NET app with Hasura.
 
 ## Sections
 
 * [Introduction](#introduction)
 * [Quickstart](#quickstart)
+* [Adding your own ASP.NET code](#adding-your-existing-asp.net-code)
 * [Data API](#data-apis)
 * [Auth API](#auth-apis)
 * [Filestore API](#filestore-apis)
-* [Custom microservice](#custom-microservice)
-* [Migrate from an existing ASP.NET app](#migrate-from-an-existing-project)
 * [Local development](#local-development)
 * [FAQ](#faq)
 
 ## Introduction
 
 This quickstart project comes with the following by default:
-1. A basic hasura project
+
+1. A basic Hasura project
+
 2. Two tables `article` and `author` with some dummy data
-3. A basic ASP.NET app which runs at the `www` subdomain which fetches a list of articles available at the 'get_articles' endpoint
 
 ## Quickstart
 
@@ -39,30 +39,9 @@ The above command does the following:
 2. Creates a new free Hasura cluster for you and sets that cluster as the default cluster for this project
 3. Initializes `hello-csharp-aspnet` as a git repository and adds the necessary git remotes.
 
-### Step 2: Getting cluster information
+### Step 2: Deploying this project
 
-Every Hasura project is run on a Hasura cluster. To get details about the cluster this project is running on:
-
-```sh
-$ hasura cluster status
-```
-
-This will give you your cluster status like so
-
-```sh
-INFO Status:
-Cluster Name:       h34-excise98-stg
-Cluster Alias:      hasura
-Kube Context:       h34-excise98-stg
-Platform Version:   v0.15.3
-Cluster State:      Synced
-```
-
-Keep a note of your cluster name. Alternatively, you can also go to your [Hasura dashboard](https://dashboard.hasura.io) and see the clusters you have.
-
-### Step 3: Deploying on a Hasura cluster
-
-To deploy your app:
+To deploy the project:
 
 ```sh
 $ git add .
@@ -71,11 +50,31 @@ $ git push hasura master
 ```
 When you push for the first time, it might take sometime. Next time onwards, it is really fast.
 
-Once the above commands are executed successfully, head over to `https://www.cluster-name.hasura-app.io` (in this case `https://www.h34-excise98-stg.hasura-app.io`) to view your app.
+Once the above commands are executed successfully, head over to `https://api.<cluster-name>.hasura-app.io` (in this case `https://api.h34-excise98-stg.hasura-app.io`) to view your app.
 
-### Api console
+## Adding your existing ASP.NET code
+The ASP.NET microservice[1] sample code is inside the `microservices/api/app` directory. You can copy all your existing ASP.NET code directly inside this directory, and start deploying your own ASP.NET code to Hasura cluster.
 
-Every Hasura cluster comes with an api console that gives your a GUI to test out the baas features of Hasura. To open the api console
+### Step 1: Add your ASP.NET code in the microservices directory
+Copy all your exising ASP.NET source code in `microservices/api/app` directory or replace the `microservices/api/app` directory with your app directory. Ensure that the structure of the directory is coherent with the current structure.
+
+### Step 2: Git add and commit
+```
+$ git add .
+$ git commit -m "Added my ASP.NET code"
+```
+
+### Step 3: Deploy
+```
+$ git push hasura master
+```
+Now your ASP.NET application should be running at: `https://api.<cluster-name>.hasura-app.io`
+
+[1] a microservice is a running application on the Hasura cluster. This could be an API, a web app, a Javascript app etc.
+
+## Hasura API console
+
+Every Hasura cluster comes with an api console that gives you a GUI to test out the BaaS features of Hasura. To open the api console
 
 ```sh
 $ hasura api-console
@@ -147,20 +146,9 @@ You can try out these in the `API EXPLORER` tab of the `api console`. To learn m
 
 There might be cases where you might want to perform some custom business logic on your apis. For example, sending an email/sms to a user on sign up or sending a push notification to the mobile device when some event happens. For this, you would want to create your own custom microservice which does these for you on the endpoints that you define.
 
-This quickstart comes with one such custom microservice written in C# using the ASP.NET framework. Check it out in action at `https://www.cluster-name.hasura-app.io` . Currently, it just returns a JSON response of "Hello World" at that endpoint.
+This quickstart comes with one such custom microservice written in C# using the ASP.NET framework. Check it out in action at `https://api.cluster-name.hasura-app.io` . Currently, it just returns a JSON response of "Hello World" at that endpoint.
 
 In case you want to use another language/framework for your custom microservice. Take a look at our docs to see how you can add a new custom microservice.
-
-## Migrate from an existing project
-
-If you have an existing ASP.NET app and would like to migrate it to Hasura:
-
-- Replace the `microservices/www/app` directory with your app directory.
-- Ensure that the structure of the directory is coherent with the current structure.
-- `git add . && git commit -m "Migration Commit"`
-- `git push hasura master`
-
-Now your existing app should be running on `https://www.cluster-name.hasura-app.io`
 
 ## Local development
 
@@ -171,9 +159,9 @@ Everytime you push, your code will get deployed on a public URL. However, for fa
 Follow these steps to test out your app locally
 
 ```sh
-$ cd microservices/www/
-$ docker build -t csharp-aspnet .
-$ docker run -d -p 8080:8080 csharp-aspnet
+$ cd microservices/api/
+$ docker build -t csharp-aspnet:<tag> .
+$ docker run -d -p 8080:8080 csharp-aspnet:<tag>
 ```
 Your app will be running on port 8080.
 
@@ -203,7 +191,7 @@ The project (a.k.a. project directory) has a particular directory structure and 
 │   ├── 1504788327_create_table_user.up.yaml
 │   └── 1504788327_create_table_user.up.sql
 └── microservices
-    └── www
+    └── api
         ├── app/
         ├── k8s.yaml
         └── Dockerfile
